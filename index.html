@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bg4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+    <script src="script.js" type="module" defer></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <!--header-->
+    <div class="header">
+        <h1 id="glowingText">Welcome</h1>
+      </div>
+      <div class="content">
+      </div>
+
+ <!--rutan/boxen där allt information om login ska finnas-->
+    <div class="container" id="loginPage">
+  
+<!--Login rutan med knappar och länkar-->
+        <form class="form" id="login">
+            <h1 class="loginTitle" id="loginTitle">Login</h1>
+            <div class="txtInputGroup">
+                <input type="text" class="formInput" id="usernameInput" autofocus placeholder="Username">
+                <input type="password" class="formInput" id="passwordInput" autofocus placeholder="Password">
+                <p class="InputErrorMsg" id="inputErrorMsg"></p>
+            </div>
+            <button type="button" class="loginBtn" id="loginBtn">Continue</button>
+            <p class="formText">
+                <a class="formLink" id="linkCreateAccount">don't have an account? Create one here</a>
+            </p>
+        </form>
+    </div>
+
+<!--andra rutan för att skapa ett konto-->
+    <div class="container formHidden" id="createAccountPage" >
+        <form class="form">
+            <h1 class="loginTitle">Create Account</h1>
+            <div class="txtInputGroup">
+                <input type="text" class="formInput" id="createUsername" autofocus placeholder="Username">
+                <input type="password" class="formInput" id="createPassword" autofocus placeholder="Password">
+                <input type="password" class="formInput" id="confirmPassword" autofocus placeholder="Confirm Password">
+            <div class="inputErrorMsg"></div>
+        </div>
+            <button  type="button" class="createAccBtn" id="createAccBtn">Continue</button>
+            <p class="formText">
+                <a class="formLink" id="linkLogin">Already a member? Sign in</a>
+            </p>
+        </form>
+    </div>
+
+
+    <!--Homepage-->
+    <div class="accountPage formHidden" id="accountPage">
+        <h1 id="userOnline"></h1>
+        <div id="accountName"></div>
+        <button type="button" class="logoutBtn" id="logoutBtn">Press here to logout</button>
+      
+    </div>
+
+
+    <div class="footer">imagine this footer but with icons that have links to my socials!.</div>   
+    
+</body>
+</html>
