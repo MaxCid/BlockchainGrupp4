@@ -41,6 +41,9 @@ loginBtn.addEventListener("click", async () => {
       localStorage.setItem("userId", userId);
     }
     inloggad();
+  
+    
+        
   }
 
  

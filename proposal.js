@@ -28,8 +28,8 @@ export default class Proposal {
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
       // console.log("hashHex", hashHex);
-      return hashHex;
-    }
+      return Promise.resolve(hashHex);
+        }
     async mineBlock(difficulty) {
       // MAJNA ETT BLOCK
       let tryHash = await this.calculateHash();

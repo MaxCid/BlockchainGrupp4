@@ -163,34 +163,21 @@ document.body.appendChild(fullProp)
 let proposalBox = document.createElement("div");
 proposalBox.id = "proposalBox";
 fullProp.appendChild(proposalBox);
+
+let suggestionContainer = document.createElement("div");
+suggestionContainer.id = "suggestionContainer";
+suggestionContainer.style.overflowY = "scroll";
+fullProp.appendChild(suggestionContainer);
 let  savedProposals = []
-// let data = {
-//   user: "Genesis",
-//   work: 0
-// };
-
-// let genesisBlock = new Proposal(data);
-// let genesisBlockHash = await genesisBlock.calculateHash();
-// genesisBlock.hash = genesisBlockHash;
-// suggestion.addSuggestion(genesisBlock);
 
 
 
-function printSuggestion() {
-  window.onload = () => {
-    if (!costInput || !costInput.value) {
-      // costInput is not defined or has no value, so do not try to use it
-      return;
-    }
- 
-  };
-}
 
 
 
 function inloggad() {
     if (localStorage.getItem("loggedIn") === "true") {
-      localStorage.getItem("Proposals")
+      savedProposals = JSON.parse(localStorage.getItem("Proposals")) || [];
         loginForm.innerHTML = "";
 
         // Create a div element
@@ -198,17 +185,9 @@ function inloggad() {
         div.id ="div";
 
         // Create a form element
-        let form = document.createElement("form");
+        let form = document.createElement("div");
         form.id = "form";
-//         form.style.position = "absolute"
-//         form.style.top = "100px"
-//         form.style.left = "550px"
-
-// let h1 = document.getElementById("h1");
-// h1.style.position = "absolute"
-// h1.style.top = ""
-
-
+//        
 
         let titleInput = document.createElement("input");
         titleInput.id = "titleInput";
@@ -234,36 +213,45 @@ function inloggad() {
         // Create a submit button
         let submitProp = document.createElement("button");
         submitProp.id = "submitProp";
-        submitProp.type = "submit";
         submitProp.innerText = "Submit proposal";
+
+        let verify = document.createElement("button")
+        verify.id = "verify"
+        verify.innerText = "Verify"
+        form.appendChild(verify)       
 
         // Add the submit button to the form
         form.appendChild(submitProp);
-
+       
         // Add the form to the div
         div.appendChild(form);
 
-        // div.style.top = "100px"
-        // div.style.display = "block";
-        // div.style.position = "absolute";
+ 
 
         // Add the div to the document
         fullProp.appendChild(div);
+form.style.position = "fixed"
+form.style.top = "15px"
+form.style.left = "150px"
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+verify.addEventListener("click", () => {
+  console.log("Börjar validering")
+ suggestion.isChainValid()
+  
+  })
+
+        submitProp.addEventListener("click", (event) => {
             // Other code to handle the form submission
            let newSavedProposals =[{Title: titleInput.value, Proposal: proposalInput.value, Cost: costInput.value}]
-            // localStorage.setItem("Proposals", JSON.stringify(savedProposals))
-console.log("submit")
-savedProposals.push(newSavedProposals)
+savedProposals.push(newSavedProposals[0])
 localStorage.setItem("Proposals", JSON.stringify(savedProposals))
 
             // Create a new suggestion object
             let newSuggestion = {
                 proposalTitle: titleInput.value,
                 Information: proposalInput.value,
-                Cost: costInput.value,
+                Cost: Number(costInput.value)
+
             };            
 
             suggestion.addSuggestion(new Proposal(newSuggestion));
@@ -276,16 +264,22 @@ localStorage.setItem("Proposals", JSON.stringify(savedProposals))
 }
 
 function suggestionPrint() {
-  document.getElementById("proposalBox").innerHTML = "";
+  proposalBox.innerHTML = "";
+  proposalBox.style.position = "absolute"
+  proposalBox.style.display = "inline-block"
+  proposalBox.style.left = "443px"
+
+  proposalBox.style.top = "44px"
+
   suggestion.suggestion.map((e) => {
     // Calculate the remaining budget
     // let amounte = budget - parseInt(costInput.value);
     
     let suggestionBox = document.createElement("div");
       suggestionBox.style.position ="flex";
-    suggestionBox.style.left = "520px";
-    suggestionBox.style.bottom = "50px";
-    suggestionBox.style.width = "100%";
+    // suggestionBox.style.left = "520px";
+    // suggestionBox.style.bottom = "50px";
+    // suggestionBox.style.width = "100%";
     suggestionBox.style.border = "1px solid black";
     suggestionBox.style.padding = "20px";
     suggestionBox.style.margin = "20px";
@@ -314,11 +308,53 @@ function suggestionPrint() {
     proposalBox.appendChild(suggestionBox);
     
   });
-} let g =localStorage.getItem("Proposals")
-        // 
- g
-    // proposalBox.style.position = "absolute"
-    // proposalBox.style.top = "600px"
+} 
+// When the page is loaded
+window.addEventListener("load", () => {
+ 
+
+  // Check if the Proposals item is present in local storage
+  if (localStorage.getItem("Proposals")) {
+    // form.style.left = "123vh"
+    proposalBox.style.position = "absolute"
+
+    proposalBox.style.display = "block"
+    proposalBox.style.top = "44px"
+    proposalBox.style.left = "504px"
+
+
+      // Retrieve the Proposals item from local storage and parse it back into an array
+      savedProposals = JSON.parse(localStorage.getItem("Proposals"));
+
+      // Iterate through the savedProposals array and create a suggestion box for each suggestion
+      savedProposals.forEach((suggestion) => {
+          // Create a suggestion box
+          let suggestionBox = document.createElement("div");
+          // Set the content of the suggestion box
+          suggestionBox.style.position ="flex";
+          // suggestionBox.style.left = "520px";
+          // suggestionBox.style.bottom = "50px";
+          suggestionBox.style.width = "50vh";
+          suggestionBox.style.border = "1px solid black";
+          suggestionBox.style.padding = "20px";
+          suggestionBox.style.margin = "20px";
+          // if (work.data.work < 4) {
+          suggestionBox.style.backgroundColor = "lightgrey";
+          suggestionBox.innerHTML = `
+              <h3>Title: ${suggestion.Title}</h3>
+              <p>Proposal: ${suggestion.Proposal}</p>
+              <p>Cost: ${suggestion.Cost}</p>
+              <p>${suggestion.hash}</p>
+          `;
+          // Add the suggestion box to the proposalBox element
+          proposalBox.appendChild(suggestionBox);
+      });
+  }
+});
+
+
+
+
 
 
 
