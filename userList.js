@@ -1,3 +1,5 @@
+//userList.js
+
 export default class UserList {
     constructor() {
       this.users = [];

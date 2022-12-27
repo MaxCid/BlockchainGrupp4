@@ -10,6 +10,11 @@ export default class Proposal {
       this.nonce = 0;
       this.amount = amount;
       this.voteCount = 0;
+      this.votes = {
+        upvotes: 0,
+        downvotes: 0,
+        abstain: 0,
+      };
     }
   
     async calculateHash() {
@@ -28,8 +33,8 @@ export default class Proposal {
         .map((b) => b.toString(16).padStart(2, "0"))
         .join("");
       // console.log("hashHex", hashHex);
-      return Promise.resolve(hashHex);
-        }
+      return hashHex;
+    }
     async mineBlock(difficulty) {
       // MAJNA ETT BLOCK
       let tryHash = await this.calculateHash();
