@@ -97,6 +97,7 @@ function handleLogin() {
 function logout() {
   localStorage.setItem("loggedIn", "false");
   window.location.reload();
+  
 }
 
 // Show proposal from local storage on page

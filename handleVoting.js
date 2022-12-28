@@ -52,6 +52,8 @@ export function handleVoting(proposalId) {
       document
         .getElementById(`submitVoteBtn${proposalId}`)
         .setAttribute("disabled", "disabled");
+        
+        
     }
 
     document.body.appendChild(hr);
@@ -196,5 +198,6 @@ validate.addEventListener("click", () => {
     voteList += `</ul>`;
     //document.body.appendChild(voteList);
     document.getElementById("voteResult").innerHTML = voteList;
+    
   }
 }

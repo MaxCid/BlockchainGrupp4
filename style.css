@@ -1,3 +1,8 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: rgb(88, 88, 88);
+}
+
 #proposalText {
     margin-top: 30px;
     width: 300px;
@@ -15,4 +20,137 @@
     float: right;
     margin-right: 15px;
     display: none;
+}
+
+.container {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". . . . ."
+      ". info info login ."
+      ". . . . .";
+    max-height: 100vh;
+  }
+
+
+  .info { 
+    position: flex;
+    grid-area: info;
+    background-color: grey;
+    min-height: 80vh;
+    min-width: 60vw;
+    border-radius: 15px 0px 0px 15px;
+    border: 1px solid grey;
+    text-align: center;
+    background-color: rgb(198, 198, 198);
+    }
+
+  
+  .login { 
+    position: flex;
+    grid-area: login;
+    background-color: darkgrey;
+    min-height:80vh;
+    min-width: 30vw;
+    border-radius: 0px 15px 15px 0px;
+    border: 1px solid grey;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+ }
+
+#loginName {
+    height: 2rem;
+    width: 20rem;
+    background-color: lightgrey;
+    border: none;
+    border-radius: 12px;
+
+}
+
+#loginPassword {
+    height: 2rem;
+    width: 20rem;
+    background-color: lightgrey;
+    border: none;
+    margin-top: 10px;
+    border-radius: 12px;
+
+}
+#loginName::placeholder {
+    color: black;
+    text-align: center;
+}
+#loginPassword::placeholder {
+    color: black;
+    text-align: center;
+}
+
+#loginName:hover {
+    background-color: rgb(200, 200, 200);
+}
+#loginPassword:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+input {
+    text-align: center;
+}
+
+input:focus::placeholder {
+    opacity: 0;
+  }
+
+#loginBtn {
+    margin-top: 10px;
+    width: 20rem;
+    height: 2rem;
+    border-radius: 12px;
+    background-color: blue;
+    color: white;
+    border: 1px solid black;
+}
+
+#loginBtn:hover {
+    transform: scale(1.02);
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+
+#loginForm {
+    margin-top: 20vh;
+}
+
+#h1 {
+    margin-top: 5vh;
+ }
+
+#h3 {
+    margin-top: 20vh;
+    font-weight: 313;
+    font-size: 15px;
+ }
+
+ #h4 {
+    font-weight: bolder;
+ }
+
+ #api {
+    border: 5px solid black;    
+ }
+
+ #kwh {
+
+ }
+
+ #proposals {
+    margin-top: 50vh;
+    border: 5px solid black;
+ }
+
+.votes {
+    
 }
