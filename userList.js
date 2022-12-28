@@ -1,12 +1,11 @@
 //userList.js
 
 export default class UserList {
-    constructor() {
-      this.users = [];
-    }
-  
-    addUser(user) {
-      this.users.push(user);
-    }
+  constructor() {
+    this.users = [];
   }
-  
+
+  addUser(user) {
+    this.users.push(user);
+  }
+}

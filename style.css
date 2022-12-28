@@ -1,0 +1,18 @@
+#proposalText {
+    margin-top: 30px;
+    width: 300px;
+}
+
+#proposalName {
+    width: 300px;
+}
+
+#submitProposalBtn {
+    margin-top: 20px;
+}
+
+#logout-btn {
+    float: right;
+    margin-right: 15px;
+    display: none;
+}
