@@ -19,7 +19,7 @@ export function handleVoting(proposalId) {
   function appendProposalForm(proposal) {
     // Display the proposal text on the page
     let proposalDiv = document.createElement("div");
-    proposalDiv.innerHTML = `<br>FÖRSLAG #${proposalId} <br> <h3 style="display: inline-block"> ${
+    proposalDiv.innerHTML = `<br>FÖRSLAG #${proposalId} <br> <h3 style="display: inline-block; height: 0px"> ${
       proposal.Namn + ""
     }</h3><p>${" " + proposal.Förslag}</p>`;
     document.body.appendChild(proposalDiv);
@@ -175,6 +175,15 @@ export function handleVoting(proposalId) {
 export function showVoteChain() {
   let voteChain = new VoteChain();
   let votes = voteChain.getVoteChain();
+  let validate = document.createElement("button")
+validate.id = "validate"
+validate.innerText = "Validate"
+validate.addEventListener("click", () => {
+  console.log("Börjar validering")
+  voteChain.validateChain()
+  
+ })
+ document.body.appendChild(validate)
   if (votes) {
     let voteList = `<ul>`;
     votes.forEach((vote) => {

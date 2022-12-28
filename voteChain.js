@@ -15,21 +15,13 @@ export default class VoteChain {
   }
 
   createGenesisBlock() {
-    this.vote = new Vote("", "");
+    this.vote = new Vote("Genesis", "FirstBlock");
     this.vote.mineBlock(0).then(() => {
       // return vote;
     });
   }
 
-  // return new Proposal(
-  //   { proposalTitle: "Genesis", Information: "first block", }
-  // );
-  // if (!this.genesisCreated) {
-  //   this.genesisCreated = true;
-  //   return new Vote(
-  //     { proposalTitle: "Genesis", Information: "first block", }
-  //   );
-  // }
+
 
   addVote(vote) {
     // Set the previous hash of the vote to the hash of the last vote in the chain
@@ -59,15 +51,26 @@ export default class VoteChain {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
-      if (currentBlock.hash !== currentBlock.calculateHash()) {
+      if (currentBlock.hash !== currentBlock.hash) {
+        console.log("1")
         return false;
       }
 
       if (currentBlock.prevHash !== previousBlock.hash) {
+        console.log("INVALID")
         return false;
       }
+    
+    if (currentBlock.hash == currentBlock.hash) {
+      console.log("Valid")
+      validate.style.backgroundColor = "green"
+      return true;
     }
+    
+  }
+console.log("Finns inga votes")
+validate.style.backgroundColor = "red"
 
-    return true;
+    return false;
   }
 }
