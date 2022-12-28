@@ -1,10 +1,10 @@
 //user.js
 
 export default class User {
-  constructor(name, password) {
+  constructor(name, password, id) {
     this.name = name;
     this.password = this.savePassword(password);
-    this.id = self.crypto.randomUUID();
+    this.id = id;
   }
 
   async consumePassword(password) {

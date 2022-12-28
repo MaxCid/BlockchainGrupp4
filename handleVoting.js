@@ -5,13 +5,13 @@ import Vote from "./vote.js";
 export function handleVoting(proposalId) {
   function motionResult(proposal) {
     let result = "";
-    if (proposal.yesVotes >= 5) {
-      result = "PASSED";
+    if (proposal.yesVotes > 5) {
+      result = "GODKÄND";
     } else if (
       parseInt(proposal.noVotes) + parseInt(proposal.abstainVotes) >=
       5
     ) {
-      result = "REJECTED";
+      result = "AVVISAD";
     }
     return result;
   }
@@ -19,9 +19,9 @@ export function handleVoting(proposalId) {
   function appendProposalForm(proposal) {
     // Display the proposal text on the page
     let proposalDiv = document.createElement("div");
-    proposalDiv.innerHTML = `<h3>${proposal.Namn + " : "}</h3><p>${
-      " " + proposal.Förslag
-    }</p>`;
+    proposalDiv.innerHTML = `<br>FÖRSLAG #${proposalId} <br> <h3 style="display: inline-block"> ${
+      proposal.Namn + ""
+    }</h3><p>${" " + proposal.Förslag}</p>`;
     document.body.appendChild(proposalDiv);
     // Create voting form
     let voteForm = document.createElement("form");
@@ -36,13 +36,13 @@ export function handleVoting(proposalId) {
 
     let proposalV = document.createElement("p");
     let hr = document.createElement("hr");
-    proposalV.textContent = `Yes: ${proposal.yesVotes}  No: ${proposal.noVotes} Abstain: ${proposal.abstainVotes} `;
+    proposalV.textContent = `Ja: ${proposal.yesVotes}  Nej: ${proposal.noVotes} Avstå: ${proposal.abstainVotes} `;
     document.body.appendChild(proposalV);
     let result = motionResult(proposal);
 
     if (result != "") {
       let proposalResult = document.createElement("p");
-      if (result == "PASSED") {
+      if (result == "GODKÄND") {
         proposalResult.style.color = "green";
       } else {
         proposalResult.style.color = "red";
@@ -87,24 +87,24 @@ export function handleVoting(proposalId) {
       appendProposalForm(proposal);
 
       // Add event listener to submit button
-      let submitBtn = document.getElementById("submitVoteBtn" + proposalId);
-      submitBtn.addEventListener("click", (event) => {
+      let submitVoteBtn = document.getElementById("submitVoteBtn" + proposalId);
+      submitVoteBtn.addEventListener("click", (event) => {
         event.preventDefault();
-
         // Get selected vote value
         let vote = document.querySelector(
           `input[name="vote[${proposalId}]"]:checked`
         )?.value;
         if (vote == undefined) {
-          alert("please select an option");
+          alert("Vänligen välj ett alternativ");
           return -1;
         }
 
         if (isItDuplicateCote(proposal, vote)) {
-          alert("You voted before for this motion");
+          alert("Du har redan röstat på detta förslag");
           return -1;
         }
 
+        let proposals = JSON.parse(localStorage.getItem("proposals")) || [];
         let userId = localStorage.getItem("userId");
         let votes = JSON.parse(localStorage.getItem("votes")) || [];
         for (let key in votes) {
@@ -114,27 +114,28 @@ export function handleVoting(proposalId) {
             oldVote.data.proposal.id == proposal.id &&
             oldVote.vote != vote
           ) {
-            for (let key2 in proposals) {
-              let prop = proposals[key2];
-              if (prop.id == proposal.id) {
-                prop.yesVotes = parseInt(prop.yesVotes);
-                prop.noVotes = parseInt(prop.noVotes);
-                prop.abstainVotes = parseInt(prop.abstainVotes);
+            /*  for (let key2 in proposals) {
+                            let prop = proposals[key2]
+                            if (prop.id == proposal.id) {
+                                prop.yesVotes = parseInt(prop.yesVotes) || 0
+                                prop.noVotes = parseInt(prop.noVotes) || 0
+                                prop.abstainVotes = parseInt(prop.abstainVotes) || 0
 
-                prop.yesVotes += vote === "yes" ? 1 : 0;
-                prop.noVotes += vote === "no" ? 1 : 0;
-                prop.abstainVotes += vote === "abstain" ? 1 : 0;
+                                prop.yesVotes += vote === "yes" ? 1 : 0;
+                                prop.noVotes += vote === "no" ? 1 : 0;
+                                prop.abstainVotes += vote === "abstain" ? 1 : 0;
 
-                prop.yesVotes -= oldVote.vote === "yes" ? 1 : 0;
-                prop.noVotes -= oldVote.vote === "no" ? 1 : 0;
-                prop.abstainVotes -= oldVote.vote === "abstain" ? 1 : 0;
-                localStorage.setItem("proposals", JSON.stringify(proposals));
-              }
-            }
-            votes[key].vote = vote;
-            localStorage.setItem("votes", JSON.stringify(votes));
+                                prop.yesVotes -= oldVote.vote === "yes" ? 1 : 0;
+                                prop.noVotes -= oldVote.vote === "no" ? 1 : 0;
+                                prop.abstainVotes -= oldVote.vote === "abstain" ? 1 : 0;
+                                localStorage.setItem('proposals', JSON.stringify(proposals))
+                            }
+                        }*/
+            /* votes[key].vote = vote
+                        localStorage.setItem('votes', JSON.stringify(votes))
 
-            window.location.reload();
+                        window.location.reload()*/
+            alert("Du har redan röstat! Inte möjligt att ändra din röst");
             return -1;
           }
         }
@@ -149,21 +150,21 @@ export function handleVoting(proposalId) {
         let newVote = new Vote({ proposal }, index, "", vote, voterId);
         newVote.hash.then(function (result) {
           newVote.hash = result;
-          let votes = JSON.parse(localStorage.getItem("votes")) || [];
-          // Add new vote to the array
-          // votes.push(newVote);
-          // localStorage.setItem("votes", JSON.stringify(votes));
           voteChain.addVote(newVote);
           showVoteChain();
         });
 
-        // Update proposal with new vote count
-        proposal.yesVotes += vote === "yes" ? 1 : 0;
-        proposal.noVotes += vote === "no" ? 1 : 0;
-        proposal.abstainVotes += vote === "abstain" ? 1 : 0;
-        // Save updated proposal in local storage
-        localStorage.setItem("proposals", JSON.stringify(proposals));
-        // Get any existing votes from local storage
+        for (let key3 in proposals) {
+          let prop3 = proposals[key3];
+          if (prop3.id == proposal.id) {
+            // Update proposal with new vote count
+            prop3.yesVotes += vote === "yes" ? 1 : 0;
+            prop3.noVotes += vote === "no" ? 1 : 0;
+            prop3.abstainVotes += vote === "abstain" ? 1 : 0;
+            // Save updated proposal in local storage
+            localStorage.setItem("proposals", JSON.stringify(proposals));
+          }
+        }
 
         window.location.reload();
       });
@@ -179,7 +180,7 @@ export function showVoteChain() {
     votes.forEach((vote) => {
       if (vote.vote) {
         voteList += `<li>`;
-        voteList += `${vote.vote} (${vote.voterId})`;
+        voteList += `Användare: <strong>${vote.voterId}</strong> röstade <strong>"${vote.vote}"</strong> på förslag <strong>#${vote.data.proposal.id}</strong>`;
         voteList += `</li>`;
       }
     });

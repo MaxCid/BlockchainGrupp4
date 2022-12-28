@@ -15,7 +15,7 @@ import { showProposalForm } from "./createProposalForm.js";
 function generateRandomUser(i) {
   let name = "test" + (i + 1);
   let password = "test" + (i + 1);
-  return new User(name, password);
+  return new User(name, password, i + 1);
 }
 
 // Create a list of users
@@ -81,7 +81,7 @@ function handleLogin() {
         );
         if (isPasswordCorrect) {
           localStorage.setItem("loggedIn", "true");
-          let userId = foundUser.id;
+          let userId = "Kungsgatan" + " " + foundUser.id;
           localStorage.setItem("userId", userId);
           localStorage.setItem("username", loginName.value);
           window.location.reload();
@@ -103,7 +103,7 @@ function logout() {
 let proposal = localStorage.getItem("proposal");
 if (proposal) {
   let proposalDiv = document.createElement("div");
-  proposalDiv.innerHTML = `<h3>Motion:</h3> <p>${proposal}</p>`;
+  proposalDiv.innerHTML = `<h3>Motions:</h3> <p>${proposal}</p>`;
   document.body.appendChild(proposalDiv);
 }
 
