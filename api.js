@@ -18,3 +18,5 @@ const showData = (data)=>{
     }
     document.getElementById('data').innerHTML = body
 }
+
+export default endpoint

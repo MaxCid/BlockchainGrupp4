@@ -7,6 +7,7 @@ import Proposal from "./proposal.js";
 import Vote from "./vote.js";
 import { handleVoting, showVoteChain } from "./handleVoting.js";
 import { showProposalForm } from "./createProposalForm.js";
+import {} from './api.js';
 
 // if (localStorage.getItem("loggedIn") === "true") {
 //   showProposalForm();
