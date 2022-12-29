@@ -61,16 +61,10 @@ export default class VoteChain {
         return false;
       }
     
-    if (currentBlock.hash == currentBlock.hash) {
-      console.log("Valid")
-      validate.style.backgroundColor = "green"
-      return true;
-    }
     
-  }
-console.log("Finns inga votes")
-validate.style.backgroundColor = "red"
+  
+validate.style.backgroundColor = "green"
 
-    return false;
+    return true;
   }
 }
