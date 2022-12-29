@@ -61,7 +61,7 @@ export default class VoteChain {
         return false;
       }
     
-    
+    }
   
 validate.style.backgroundColor = "green"
 
