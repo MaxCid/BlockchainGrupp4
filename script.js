@@ -93,6 +93,8 @@ function handleLogin() {
     });
   }
 }
+let api = document.getElementById("api");
+api.classList.remove("formHidden");
 
 function logout() {
   localStorage.setItem("loggedIn", "false");

@@ -18,11 +18,12 @@ export function handleVoting(proposalId) {
 
   function appendProposalForm(proposal) {
     // Display the proposal text on the page
+    let skrivProposal = document.getElementById("skrivProposal");
     let proposalDiv = document.createElement("div");
     proposalDiv.innerHTML = `<br>FÖRSLAG #${proposalId} <br> <h3 style="display: inline-block; height: 0px"> ${
       proposal.Namn + ""
     }</h3><p>${" " + proposal.Förslag}</p>`;
-    document.body.appendChild(proposalDiv);
+    skrivProposal.appendChild(proposalDiv);
     // Create voting form
     let voteForm = document.createElement("form");
     voteForm.innerHTML = `<label for="yesVote[${proposalId}]">Ja</label> 
@@ -32,12 +33,12 @@ export function handleVoting(proposalId) {
                                   <label for="abstainVote[${proposalId}]">Avstå</label>
                                   <input type="radio" name="vote[${proposalId}]" id="abstainVote[${proposalId}]" value="abstain">
                                   <button id="submitVoteBtn${proposalId}" class="submitVoteBtn">Rösta</button>`;
-    document.body.appendChild(voteForm);
+    skrivProposal.appendChild(voteForm);
 
     let proposalV = document.createElement("p");
     let hr = document.createElement("hr");
     proposalV.textContent = `Ja: ${proposal.yesVotes}  Nej: ${proposal.noVotes} Avstå: ${proposal.abstainVotes} `;
-    document.body.appendChild(proposalV);
+    skrivProposal.appendChild(proposalV);
     let result = motionResult(proposal);
 
     if (result != "") {
@@ -56,7 +57,9 @@ export function handleVoting(proposalId) {
         
     }
 
-    document.body.appendChild(hr);
+    skrivProposal.appendChild(hr);
+
+    skrivProposal.style.textAlign = "center";
   }
 
   function isItDuplicateCote(proposal, newVote) {
@@ -175,17 +178,18 @@ export function handleVoting(proposalId) {
 }
 
 export function showVoteChain() {
+  let login = document.getElementById("login");
   let voteChain = new VoteChain();
   let votes = voteChain.getVoteChain();
   let validate = document.createElement("button")
-validate.id = "validate"
-validate.innerText = "Validate"
-validate.addEventListener("click", () => {
+  validate.id = "validate"
+  validate.innerText = "Validate"
+  validate.addEventListener("click", () => {
   console.log("Börjar validering")
   voteChain.validateChain()
   
  })
- document.body.appendChild(validate)
+ login.appendChild(validate)
   if (votes) {
     let voteList = `<ul>`;
     votes.forEach((vote) => {

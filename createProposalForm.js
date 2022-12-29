@@ -10,9 +10,10 @@ export function showProposalForm() {
     loginForm.innerHTML = "";
 
     // Create proposal form
+    let api = document.getElementById("api");
     let proposalForm = document.createElement("form");
     proposalForm.innerHTML = `<h3>Skriv ett förslag:</h3> <input type="text" id="proposalName" placeholder="Titel på förslag"><br> <textarea id="proposalText" placeholder="Skriv ditt förslag här"></textarea><br> <button id="submitProposalBtn">Skicka</button>`;
-    document.body.appendChild(proposalForm);
+    api.appendChild(proposalForm);
     // Add event listener to submit button
     let submitBtn = document.getElementById("submitProposalBtn");
     submitBtn.addEventListener("click", (event) => {
