@@ -49,7 +49,7 @@ export function handleVoting(proposalId) {
         proposalResult.style.color = "red";
       }
       proposalResult.textContent = `${result}`;
-      document.body.appendChild(proposalResult);
+      skrivProposal.appendChild(proposalResult);
       document
         .getElementById(`submitVoteBtn${proposalId}`)
         .setAttribute("disabled", "disabled");
