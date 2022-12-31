@@ -34,6 +34,26 @@ body {
     max-height: 100vh;
   }
 
+.tabla-css {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 600px;
+    box-shadow: 0 0 25px #a39e9e;
+    border-collapse: collapse;
+}
+.tabla-css thead tr {
+    background-color: #f0b90b;
+    color:#252a34;
+    text-align: center;
+}
+.tabla-css th,
+.tabla-css td {
+    padding: 20px 20px;
+    text-align: center;
+}
+.tabla-css tbody tr:nth-of-type(even){
+ background-color: #f8c7282c;
+}
 
   .info { 
     position: flex;
@@ -178,8 +198,8 @@ input:focus::placeholder {
 
 }
 
-ul {
- 
+ul li {
+  list-style-position: inside;
 }
 
 
