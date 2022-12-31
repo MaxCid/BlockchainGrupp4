@@ -37,7 +37,7 @@ body {
 .tabla-css {
     margin-left: auto;
     margin-right: auto;
-    min-width: 600px;
+    min-width: 450px;
     box-shadow: 0 0 25px #a39e9e;
     border-collapse: collapse;
 }

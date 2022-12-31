@@ -11,7 +11,7 @@ const showData = (data)=>{
     let body = ''
     let counter = 0;
     for (let i=0; i < data.length; i++) {
-        if (counter >= 14) {
+        if (counter >= 10) {
             break;
         }
         body += `<tr><td>${data[i].symbol}</td><td>${data[i].price}</td></tr>`;
